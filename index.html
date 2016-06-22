@@ -5,48 +5,103 @@
 		<title>HBWSstats</title>
 		<link rel="stylesheet" type="text/css" href="_css/pure-min.css">
 		<script type="text/javascript" src="_js/jquery-2.2.4.min.js"></script>
-		<script type="text/javascript" src="_js/Chart.bundle.js"></script>
+		<script type="text/javascript" src="_js/Chart.bundle.js"></script>		
 		<script type="text/javascript">
-			$(document).ready(function() {
-				/*$.ajax({
+			$(document).ready(function() {				
+				$.ajax({
 					type: 'GET',
 					url: 'http://mpsacademico.esy.es/index.php?categoria=lanche',
 					dataType: 'jsonp',
 					crossDomain: true
 				}).done(function(json){
-
 					console.log(json);
-				})*/
-				var ctx = document.getElementById("metodos");
+				})
+				$("header#faixa-titulo div ul li a").click(function(){					
+					$("header#faixa-titulo div ul li a").removeClass("fundo");
+					$(this).addClass("fundo");
+				});
+				$("#mh").click(function(){				
+						charMetodosHttp(["GET","POST"],[50,60]);
+				});
+				$("#sr").click(function(){				
+						charMetodosHttp(["200","404"],[10,60]);
+				});
+				$("#or").click(function(){				
+						bar(["Cardápio","Lanche Específico"],[10,60]);
+				});
+			});
+			function charMetodosHttp(rotulos, dados){
+				var ctx = document.getElementById("area-grafico");				
 				var myPieChart = new Chart(ctx,{
-				    type: 'pie',
-				    data: {
-					labels: ["GET", "POST", "PUT", "DELETE"],
+					type: 'pie',
+					data: {
+					labels: rotulos,
 					datasets: [
 						{
-				            data: [70, 25, 4, 1],
-				            backgroundColor: [
-				                "#800000",
-				                "#36A2EB",
-				                "#FFCE56",
-								"#FF00FF"
-				            ],
-				            hoverBackgroundColor: [
-				                "#FF6384",
-				                "#36A2EB",
-				                "#000000"
-				            ]
-				        }
-					]
-					
-					}    
+							data: dados,
+							backgroundColor: [
+								"#4B0082",
+								"#FFD700",
+								"#191970",
+								"#FF4500"
+							]				           
+						}
+					]					
+					}								
 				});
-			}); 			
+			}
+			function bar(rotulos, dados){
+				var ctx = document.getElementById("area-grafico");			
+				var data = {
+					labels: ["Consulta Cardápio", "February", "March", "April", "May", "June", "July"],
+					datasets: [
+						{
+							label: "My First dataset",
+							backgroundColor: "rgba(75,0,130,0.2)",
+							borderColor: "rgba(75,0,130,1)",
+							borderWidth: 1,
+							hoverBackgroundColor: "rgba(255,215,0,0.4)",
+							hoverBorderColor: "rgba(255,215,0,1)",
+							data: [65, 59, 80, 81, 56, 55, 40],
+						}
+					]
+				};
+				var myLineChart = new Chart(ctx, {
+				type: 'bar',
+				data: data				
+				});
+			}
 		</script>
+		<style>
+			#casca{
+				padding: 10px;
+			}
+			header#faixa-titulo h1, h3{
+				display:inline;
+			}
+			.grafico{
+				/*width: 80% !important;
+				height: 80% !important;		*/
+			}
+			.fundo{
+				background-color: #eee;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>HBWSstats</h1>
-		<h2>Estatísticas de Acesso</h2>
-		<canvas id="metodos" style="width:100%;"></canvas>
+		<div id="casca">
+			<header id="faixa-titulo">
+				<h1>HBWSstats</h1>
+				<h3>&bull; Estatísticas de Acesso</h3>				
+				<div class="pure-menu pure-menu-horizontal">					
+					<ul class="pure-menu-list">
+						<li class="pure-menu-item"><a href="#" id="mh" class="pure-menu-link">Métodos HTTP</a></li>
+						<li class="pure-menu-item"><a href="#" id="sr" class="pure-menu-link">Status das Requisições</a></li>
+						<li class="pure-menu-item"><a href="#" id="or" class="pure-menu-link">Operações Realizadas</a></li>
+					</ul>
+				</div>
+			</header>
+			<canvas id="area-grafico" class="grafico"></canvas>
+		</div>
 	</body>
-</html> 
+</html>

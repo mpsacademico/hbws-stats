@@ -3,35 +3,41 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>HBWSstats</title>
+		<link rel="shortcut icon" href="_img/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" type="text/css" href="_css/pure-min.css">
 		<script type="text/javascript" src="_js/jquery-2.2.4.min.js"></script>
 		<script type="text/javascript" src="_js/Chart.bundle.js"></script>		
 		<script type="text/javascript">
-			$(document).ready(function() {				
-				$.ajax({
-					type: 'GET',
-					url: 'http://mpsacademico.esy.es/index.php?categoria=lanche',
-					dataType: 'jsonp',
-					crossDomain: true
-				}).done(function(json){
-					console.log(json);
-				})
+			$(document).ready(function() {			
+
 				$("header#faixa-titulo div ul li a").click(function(){					
 					$("header#faixa-titulo div ul li a").removeClass("fundo");
 					$(this).addClass("fundo");
 				});
-				$("#mh").click(function(){				
-						charMetodosHttp(["GET","POST"],[50,60]);
+
+				$("#mh").click(function(){		
+						buscarDados();
+						console.log("ei");
+						pie(["GET","POST"],[50,60]);
 				});
 				$("#sr").click(function(){				
-						charMetodosHttp(["200","404"],[10,60]);
+						pie(["200","404"],[10,60]);
 				});
 				$("#or").click(function(){				
 						bar(["Cardápio","Lanche Específico"],[10,60]);
 				});
+
 			});
-			function charMetodosHttp(rotulos, dados){
-				var ctx = document.getElementById("area-grafico");				
+
+			var i = function(data){
+				//console.log("teste");
+				//console.log(data);
+				alert("teste");
+			}
+
+			function pie(rotulos, dados){
+				limparChar();
+				var ctx = document.getElementById("grafico");		
 				var myPieChart = new Chart(ctx,{
 					type: 'pie',
 					data: {
@@ -50,19 +56,21 @@
 					}								
 				});
 			}
+
 			function bar(rotulos, dados){
-				var ctx = document.getElementById("area-grafico");			
+				limparChar();
+				var ctx = document.getElementById("grafico");			
 				var data = {
-					labels: ["Consulta Cardápio", "February", "March", "April", "May", "June", "July"],
+					labels: rotulos,
 					datasets: [
 						{
-							label: "My First dataset",
+							label: "Totais de Operações Realizadas",
 							backgroundColor: "rgba(75,0,130,0.2)",
 							borderColor: "rgba(75,0,130,1)",
 							borderWidth: 1,
 							hoverBackgroundColor: "rgba(255,215,0,0.4)",
 							hoverBorderColor: "rgba(255,215,0,1)",
-							data: [65, 59, 80, 81, 56, 55, 40],
+							data: dados,
 						}
 					]
 				};
@@ -71,8 +79,24 @@
 				data: data				
 				});
 			}
+
+			function limparChar(){
+				$("canvas").remove();
+				$("#area-grafico").append("<canvas id=\"grafico\"></canvas>");
+			}
+
+			function buscarDados(){				
+				$.ajax({
+					type: 'GET',
+					url: 'http://mpsacademico.esy.es/index.php?categoria=lanche',
+					dataType: 'jsonp',
+					crossDomain: true,
+					success: i
+				})							
+			}
+
 		</script>
-		<style>
+		<style type="text/css">
 			#casca{
 				padding: 10px;
 			}
@@ -81,7 +105,7 @@
 			}
 			.grafico{
 				/*width: 80% !important;
-				height: 80% !important;		*/
+				height: 80% !important;*/
 			}
 			.fundo{
 				background-color: #eee;
@@ -101,7 +125,7 @@
 					</ul>
 				</div>
 			</header>
-			<canvas id="area-grafico" class="grafico"></canvas>
+			<div id="area-grafico" class="grafico"><canvas id="grafico"></canvas></div>
 		</div>
 	</body>
 </html>

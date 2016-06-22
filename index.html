@@ -87,12 +87,15 @@
 
 			function buscarDados(){				
 				$.ajax({
-					type: 'GET',
-					url: 'http://mpsacademico.esy.es/index.php?categoria=lanche',
-					dataType: 'jsonp',
-					crossDomain: true,
-					success: i
-				})							
+ 					type: 'GET',
+ 					url: 'http://mpsacademico.esy.es/index.php?categoria=lanche',
+ 					contentType: "application/json",
+ 					dataType: 'jsonp',
+ 					crossDomain: true
+ 				}).done(function(json){
+ 					console.log(json);
+ 					console.log("feito");
+				})											
 			}
 
 		</script>

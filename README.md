@@ -1,14 +1,18 @@
-# HBWSstats
+# HBWS stats
 
-Protótipo de cliente Javascript para exibição de estatísticas de requisições do sistema HBWS
+HBWS stats é um protótipo de cliente javascript para exibição de estatísticas de requisições do HBWS.
 
-<img src="doc/visao_geral.png">
+![Visão Geral do HBWS stats](doc/visao_geral.png)
 
-### Bibliotecas
+### Linguagem, Ferramentas e Bibliotecas
 
-- http://www.chartjs.org/ exibe gráficos animados conforme parâmetros de entrada e configuração
-- https://jquery.com/ auxilia na manipulação dos elementos HTML, eventos e requisições assíncronas
-- http://zeptojs.com/ fornece uma alternativa ao JQuery, mais leve e com as mesmas funções
+- Javascript, HTML e CSS  
+
+- Notepad++ e Chrome Web Browser  
+
+- [Chart.js](http://www.chartjs.org/) exibe gráficos animados conforme parâmetros de entrada e configuração  
+- [jQuery](https://jquery.com/) auxilia na manipulação dos elementos HTML, eventos e requisições assíncronas  
+- [Zepto.js](http://zeptojs.com/) fornece uma alternativa ao JQuery, mais leve e com as mesmas funcionalidades  
 
 ### Referências
 

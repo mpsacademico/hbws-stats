@@ -2,11 +2,13 @@
 
 HBWS stats é um protótipo de cliente javascript para exibição de estatísticas de requisições do [HBWS](https://github.com/mpsacademico/hbws#hummm-burgueria-web-service).  
 O papel desta ferramenta é estruturar graficamente os registros gerados no uso das funcionalidades do web service.  
-Esse tipo de visualização facilita o acompanhamento do status e comportamento do sistema principal de um modo geral.
+Esse tipo de visualização facilita o acompanhamento do status e comportamento do sistema principal de um modo geral.  
+
+O HBWS stats é um subprojeto de [HBWS](https://github.com/mpsacademico/hbws#hummm-burgueria-web-service).
 
 ![Visão Geral do HBWS stats](doc/visao_geral.png)
 
-## Linguagem, Ferramentas e Bibliotecas
+## Linguagens, Ferramentas e Bibliotecas
 
 - Javascript, HTML e CSS
 - Notepad++ e Chrome Web Browser
